@@ -11,3 +11,9 @@ By default, 3 boxes will be created by Vagrant:
 + `ci-server` - Contains CI server (drone.io) and some base packages: `docker`
 + `dev` - Contains base packages: `docker`, `docker-compose`
 + `prod` - Contains base packages: `docker`, `docker-compose`
+
+Start docker registry
+
+```bash
+docker-compose -f registry.yml up -d
+```

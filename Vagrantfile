@@ -5,7 +5,7 @@ Vagrant.configure(2) do |config|
 
   # CI Server box configurations
   config.vm.define "ci" do |ci|
-    ci.vm.network "private_network", ip: "192.168.100.100"
+    ci.vm.network "private_network", type: "dhcp"
     ci.vm.hostname = "ci-server"
 
     ci.vm.provider :virtualbox do |box|
@@ -14,14 +14,14 @@ Vagrant.configure(2) do |config|
     end
 
     ci.vm.provision "shell", path: "install/docker.sh"
-    ci.vm.provision "shell", path: "install/drone.sh"
+    ci.vm.provision "shell", path: "install/docker-compose.sh"
 
     ci.vm.synced_folder ".", "/data"
   end
 
   # Development box configurations
   config.vm.define "dev" do |dev|
-    dev.vm.network "private_network", ip: "192.168.100.101"
+    dev.vm.network "private_network", type: "dhcp"
     dev.vm.hostname = "development"
 
     dev.vm.provider :virtualbox do |box|
@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
 
   # Production box configurations
   config.vm.define "prod" do |prod|
-    prod.vm.network "private_network", ip: "192.168.100.102"
+    prod.vm.network "private_network", type: "dhcp"
     prod.vm.hostname = "production"
 
     prod.vm.provider :virtualbox do |box|
